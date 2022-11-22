@@ -1,0 +1,135 @@
+/* Text stuff */
+h1{
+  text-align: center;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	height: 100%;
+background-color:wheat;
+}
+
+/* Nav Bar */
+header {
+  height: 200px;
+  background-color:green;
+  text-align: center;
+  padding: 5px;
+}
+
+
+.navBar {
+  height: fit-content;
+  /* border-style: groove; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: ease-in;
+  flex-direction: column;
+}
+nav {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;
+  align-items: center;
+  float: right;
+}
+nav a {
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  align-items: center;
+  padding: 15px 20px;
+  margin: 10px;
+  font-size: 20px;
+  border-radius: 25px;
+  color: aliceblue;
+  font-family: "Noto Sans", sans-serif, "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  /* border: 1px solid red; */
+}
+nav a:hover {
+  transition: 1s;
+  font-size: 22px;
+  width: max-content;
+  align-items: right;
+  background: linear-gradient(53deg, green, rgb(83, 218, 10));
+}
+/* Sidebar and main content */
+.container {
+	height: 100%;
+}
+
+.sidebarLeft {
+	display: inline-block;
+	vertical-align: top;
+	height: 100%;
+	width: 12%;
+	overflow: auto;
+  background-color: green;
+  float: left;
+}
+
+/* .sidebarRight {
+	display: inline-block;
+	vertical-align: top;
+	height: 100%;
+	width: 10%;
+	overflow: auto;
+  background-color: green;
+  float: right;
+} */
+
+.sidebar-content{
+  display: flex;
+  align-items: center;
+  position:fixed;
+  flex-shrink: 1;
+  width: 11%;
+
+}
+
+.content {
+	display: flex;
+  flex-direction: column;
+	height: 100%;
+	width: 88%;
+	overflow: auto;
+  align-items: center;
+}
+
+/* Images */
+section{
+  height: 35%;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+section img{
+  border: 3px solid;
+  border-block-start-color: blue;
+  border-block-end-color: green;
+
+}
+
+/* Button */
+button{
+  margin: 2rem;
+  height: fit-content;
+  width: fit-content;
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  align-items: center;
+}
+/* Results */
+.results{
+  border-style: dashed;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: rgb(131, 170, 131);
+}
