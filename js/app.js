@@ -1,5 +1,6 @@
 `use strict`;
 
+// Global Variables
 // query selector is just like a css selector, works the same way
 let productContainer = document.querySelector(`section`);
 let image1 = document.querySelector(`section img:first-child`);
@@ -11,12 +12,6 @@ let index1 = 0;
 let index2 = 0;
 let index3 = 0;
 let clicks = 0;
-
-//we can use a goat constructor
-//clicks
-//views
-//src/products picture details
-//name
 
 function Product(name, src) {
   this.name = name;
@@ -53,7 +48,7 @@ function getRandomIndex() {
   return Math.floor(Math.random() * products.length) // Math.random() ** goats.length returns number between 0-2.9999999. Math.floor() will equal 0,1,2
 }
 
-// render function: invoke function on page load, I want to load 2 random goats
+// render function: invoke function on page load, I want to load 3 random products
 function renderProducts() {
   productNumber = [];
 
@@ -126,8 +121,7 @@ function viewResults(event) {
     li.innerText = `${products[i].name} was viewed ${products[i].views} times and was clicked on ${products[i].clicks} times.`;
     ul.appendChild(li);
   }
-  // Not a great way to remove this item
-  // resultsButton.removeEventListener(`click`, viewResults);
+
 }
 
 // On page load
