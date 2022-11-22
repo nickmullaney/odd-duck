@@ -13,6 +13,7 @@ body {
 background-color:wheat;
 }
 
+/* Nav Bar */
 header {
   height: 200px;
   background-color:green;
@@ -57,7 +58,7 @@ nav a:hover {
   align-items: right;
   background: linear-gradient(53deg, green, rgb(83, 218, 10));
 }
-
+/* Sidebar and main content */
 .container {
 	height: 100%;
 }
@@ -99,10 +100,24 @@ nav a:hover {
   align-items: center;
 }
 
+/* Images */
+section{
+  height: 35%;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
 
+section img{
+  border: 3px solid;
+  border-block-start-color: blue;
+  border-block-end-color: green;
+
+}
 
 /* Button */
 button{
+  margin: 2rem;
   height: fit-content;
   width: fit-content;
   padding: 1rem;
