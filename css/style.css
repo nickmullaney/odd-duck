@@ -67,7 +67,7 @@ nav a:hover {
 	display: inline-block;
 	vertical-align: top;
 	height: 100%;
-	width: 10%;
+	width: 12%;
 	overflow: auto;
   background-color: green;
   float: left;
@@ -88,14 +88,15 @@ nav a:hover {
   align-items: center;
   position:fixed;
   flex-shrink: 1;
-  width: inherit;
+  width: 11%;
+
 }
 
 .content {
 	display: flex;
   flex-direction: column;
 	height: 100%;
-	width: 90%;
+	width: 88%;
 	overflow: auto;
   align-items: center;
 }
@@ -124,4 +125,11 @@ button{
   padding-left: 2rem;
   padding-right: 2rem;
   align-items: center;
+}
+/* Results */
+.results{
+  border-style: dashed;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: rgb(131, 170, 131);
 }

@@ -45,30 +45,30 @@ let product17 = new Product(`Water You Down Can`, `img/water-can.jpg`);
 let product18 = new Product(`Dr Evil Wine Glass`, `img/wine-glass.jpg`);
 
 
-let products = [product1, product2, product3, product4, product5, product6, product7, product8, product9, product10, product11, product12, product13, product14, product15, product16, product17, product18];
+let products = [product1,product2,product3,product4,product5,product6,product7,product8,product9,product10,product11,product12,product13,product14,product15,product16,product17,product18];
 
 // get random goat index
 function getRandomIndex() {
   // possible return values: 0, 1, 2
-  return Math.floor(Math.random() * products.length) // Math.random() ** goats.length returns number between 0-2.9999999. Math.floor() will equal 0,1,2
+  return Math.floor(Math.random() * products.length)
 }
 
 // render function: invoke function on page load, I want to load 2 random goats
 function renderProducts() {
   productNumber = [];
-
-  // This prevents the same images from appearing
-
-  // Build while loop for all 3 things********************
-  while (productNumber.length < 3) {
+  
+  
+    while(productNumber.length < 3){
     let randomIndex = getRandomIndex();
     console.log(`------------randomIndex${randomIndex}`)
     // while unique numbers does not include the the random generated number inside nums, then push it
-    if (!productNumber.includes(randomIndex)) {
-      productNumber.push(randomIndex);
+    if(!productNumber.includes(products[randomIndex])){
+    productNumber.push(products[randomIndex]);    
     }
-    console.log(productNumber);
+  // Otherwise loop until length is 3
   }
+  console.log(productNumber);
+  
   let index1 = productNumber.shift();
   console.log(index1);
   let index2 = productNumber.shift();
@@ -76,40 +76,79 @@ function renderProducts() {
   let index3 = productNumber.shift();
   console.log(index3);
 
+  
 
-  let firstProduct = products[index1];
-  let secondProduct = products[index2];
-  let thirdProduct = products[index3];
+  // index1 = getRandomIndex();
+  // index2 = getRandomIndex();
+  // index3 = getRandomIndex();
+  // This prevents the same images from appearing
+
+  // Build while loop for all 3 things********************
+
+  
+  // while (index1 === index2) {
+  //   index2 = getRandomIndex();
+  // }
+
+  // let firstProduct = products[index1];
+  // let secondProduct = products[index2];
+  // let thirdProduct = products[index3];
 
   // DOM manipulation
-  // This replaces the src for the image with the img src from the product variable
-  image1.src = firstProduct.src;
-  image1.alt = firstProduct.name;
-  image1.title = firstProduct.name
+  // This replaces the src for the image with the img src from the goat variable
+  image1.src = index1.src;
+  image1.alt = index1.name;
+  image1.title = index1.name
   image1.id = index1;
 
-  image2.src = secondProduct.src;
-  image2.alt = secondProduct.name;
-  image2.title = secondProduct.name;
+  image2.src = index2.src;
+  image2.alt = index2.name;
+  image2.title = index2.name;
   image2.id = index2;
 
-  image3.src = thirdProduct.src;
-  image3.alt = thirdProduct.name;
-  image3.title = thirdProduct.name;
+  image3.src = index3.src;
+  image3.alt = index3.name;
+  image3.title = index3.name;
   image3.id = index3;
 
   // increment views
-  firstProduct.views++;
-  secondProduct.views++;
-  thirdProduct.views++;
+  index1.views++;
+  index2.views++;
+  index3.views++;
 }
 
 // Event handler
-// what happens when a user clicks a product?
+// what happens when a user clicks a goat?
+//  increment goats .clicks
+// render 2 new goats
 function handleProductClick(event) {
   clicks++;
+  // the event object knows about the event and the element targeted
+
+
+  // how to increment the correct goat's .clicks
+  // Option 1 using For Loop***************************************
+  // if goat[i].alt = event.target.alt, then increment clicks
+  // for(let i = 0; i < goats.length; i++){
+  //   if (goats[i].name == event.target.alt){
+  //     goats[i].clicks++;
+  //   }
+  // }
+  //Option2 **************************
+  //use global index variables
+  if (products[index1].name = event.target.alt){
+    products[index1].clicks++;
+  }
+  if (products[index2].name = event.target.alt){
+    products[index2].clicks++;
+  }
+  if (products[index3].name = event.target.alt){
+    products[index3].clicks++;
+  }
+
+  // Option 3, using ID***************************
   products[event.target.id].clicks++;
-  if (clicks > 24) {
+  if (clicks >24){
     image1.removeEventListener(`click`, handleProductClick);
     image2.removeEventListener(`click`, handleProductClick);
     image3.removeEventListener(`click`, handleProductClick);
@@ -118,10 +157,10 @@ function handleProductClick(event) {
   renderProducts();
 }
 
-function viewResults(event) {
+function viewResults(event){
   let ul = document.querySelector(`ul`);
   // Make one li for each goat inside goats[]
-  for (let i = 0; i < products.length; i++) {
+  for(let i = 0; i < products.length; i++){
     let li = document.createElement(`li`);
     li.innerText = `${products[i].name} was viewed ${products[i].views} times and was clicked on ${products[i].clicks} times.`;
     ul.appendChild(li);
