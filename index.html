@@ -23,14 +23,13 @@
 
     <!-- Side Bars -->
     <div class="container">
-     
       <div class="sidebarLeft">
         <div class="sidebar-content">
           <img
             src="img/duck-waddling.gif"
             alt="Duck Waddling"
-            height=100%
-            width=100%
+            height="100%"
+            width="100%"
           />
         </div>
       </div>
@@ -38,44 +37,18 @@
         <h1>Tell me what ya like!</h1>
         <!-- product images -->
         <section>
-          <img >
-          <img >
-          <img >
+          <img />
+          <img />
+          <img />
         </section>
         <button id="results">View Results</button>
         <!-- Results info -->
-       <div class="results">
-        <ul></ul>
-       </div>
-       <div>
-        <canvas id="myChart"></canvas>
-      </div>
-      
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      
-      <script>
-        const ctx = document.getElementById('myChart');
-      
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-              label: '# of Votes',
-              data: [12, 19, 3, 5, 2, 3],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            }
-          }
-        });
-      </script>
-        
+        <div class="results">
+          <ul></ul>
+        </div>
+        <div class="chart">
+          <canvas id="myChart"></canvas>
+        </div>
       </div>
       <!-- <div class="sidebarRight">
         <div class="sidebar-content">
@@ -86,6 +59,7 @@
     <!-- Main Content -->
 
     <!-- Footer -->
-  <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
