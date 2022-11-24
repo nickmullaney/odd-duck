@@ -57,19 +57,16 @@ function renderProducts() {
   // Build while loop for all 3 things********************
   while (productNumber.length < 3) {
     let randomIndex = getRandomIndex();
-    console.log(`------------randomIndex${randomIndex}`)
     // while unique numbers does not include the the random generated number inside nums, then push it
     if (!productNumber.includes(randomIndex)) {
       productNumber.push(randomIndex);
     }
-    console.log(productNumber);
+
   }
   let index1 = productNumber.shift();
-  console.log(index1);
   let index2 = productNumber.shift();
-  console.log(index2);
   let index3 = productNumber.shift();
-  console.log(index3);
+
 
 
   let firstProduct = products[index1];
@@ -78,6 +75,13 @@ function renderProducts() {
 
   // DOM manipulation
   // This replaces the src for the image with the img src from the product variable
+// Attempted for loop
+// for(let i = 1; i < 4; i++){
+//   image(i).src = firstProduct.src;
+//   image(i).alt = firstProduct.name;
+//   image(i).title = firstProduct.name
+//   image(i).id = index(i);
+// }
   image1.src = firstProduct.src;
   image1.alt = firstProduct.name;
   image1.title = firstProduct.name
@@ -97,6 +101,9 @@ function renderProducts() {
   firstProduct.views++;
   secondProduct.views++;
   thirdProduct.views++;
+
+
+
 }
 
 // Event handler
@@ -109,7 +116,6 @@ function handleProductClick(event) {
     image2.removeEventListener(`click`, handleProductClick);
     image3.removeEventListener(`click`, handleProductClick);
   }
-  console.log(products);
   renderProducts();
 }
 
@@ -121,8 +127,79 @@ function viewResults(event) {
     li.innerText = `${products[i].name} was viewed ${products[i].views} times and was clicked on ${products[i].clicks} times.`;
     ul.appendChild(li);
   }
-
+  renderChart();
 }
+
+function renderChart() {
+  let productNames = [];
+  let productLikes = [];
+  let productViews = [];
+  for (let i = 0; i < products.length; i++) {
+    productNames.push(products[i].name);
+    productLikes.push(products[i].clicks);
+    productViews.push(products[i].views);
+  }
+
+  /* refer to Chart.js > Chart Types > Bar Chart: 
+  https://www.chartjs.org/docs/latest/charts/bar.html 
+  and refer to Chart.js > Getting Started > Getting Started:
+  https://www.chartjs.org/docs/latest/getting-started/ */
+  const data = {
+    labels: productNames,
+    datasets: [{
+      label: 'Likes',
+      data: productLikes,
+      backgroundColor: [
+        'rgba(17, 133, 85, 0.8)',
+        'rgba(26, 34, 218, 0.8)',
+        'rgba(218, 26, 70, 0.8)',
+        'rgba(26, 218, 214, 0.8)'
+      ],
+      borderColor: [
+        'rgba(198, 218, 26, 0.8)'
+      ],
+      borderWidth: 1
+    },
+    {
+      label: 'Views',
+      data: productViews,
+      backgroundColor: [
+        'rgba(211, 211, 130, 0.8)'
+      ],
+      borderColor: [
+        'rgb(255, 159, 64)'
+      ],
+      borderWidth: 1
+    }]
+  };
+  let delayed;
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      animation: {
+        onComplete: () => {
+          delayed = true;
+        },
+        delay: (context) => {
+          let delay = 0;
+          if (context.type === 'data' && context.mode === 'default' && !delayed) {
+            delay = context.dataIndex * 300 + context.datasetIndex * 100;
+          }
+          return delay;
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    },
+  };
+  let canvasChart = document.getElementById('myChart');
+  const myChart = new Chart(canvasChart, config);
+}
+
 
 // On page load
 image1.addEventListener(`click`, handleProductClick);

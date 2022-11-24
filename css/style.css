@@ -125,6 +125,12 @@ button{
   padding-left: 2rem;
   padding-right: 2rem;
   align-items: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 500;
+  background-color: darkolivegreen;
+  color: aliceblue;
+  border: 2px solid gray;
+  border-style: groove;
 }
 /* Results */
 .results{
@@ -132,4 +138,13 @@ button{
   margin: 1rem;
   padding: 1rem;
   background-color: rgb(131, 170, 131);
+}
+.results::before{
+  background-color: none;
+}
+
+.chart{
+  width: 100%;
+  padding: 1rem;
+  background-color: rgb(112, 221, 181);
 }
