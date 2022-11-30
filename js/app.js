@@ -39,8 +39,36 @@ let product16 = new Product(`Unicorn Mean`, `img/unicorn.jpg`);
 let product17 = new Product(`Water You Down Can`, `img/water-can.jpg`);
 let product18 = new Product(`Dr Evil Wine Glass`, `img/wine-glass.jpg`);
 
-
 let products = [product1, product2, product3, product4, product5, product6, product7, product8, product9, product10, product11, product12, product13, product14, product15, product16, product17, product18];
+
+
+// Local storage to save our products at each click, initialized on click
+function saveProducts(){
+  // Step 1
+  let savedProducts = JSON.stringify(products);
+  // Step 2
+  localStorage.setItem(`savedProducts`, savedProducts);
+}
+
+// Function to load products on page load
+function loadProducts(){
+  // Step 3
+  let getProducts = localStorage.getItem(`savedProducts`);
+  if(getProducts){
+    products = JSON.parse(getProducts);
+    console.log(`products are`, getProducts);
+    return getProducts;
+  }
+  // Step 4
+}
+
+function pageLoad(){
+  if(!loadProducts){
+    return;
+  }
+  //apply product last
+  loadProducts();
+}
 
 // get random goat index
 function getRandomIndex() {
@@ -51,9 +79,7 @@ function getRandomIndex() {
 // render function: invoke function on page load, I want to load 3 random products
 function renderProducts() {
   productNumber = [];
-
   // This prevents the same images from appearing
-
   // Build while loop for all 3 things********************
   while (productNumber.length < 3) {
     let randomIndex = getRandomIndex();
@@ -61,18 +87,14 @@ function renderProducts() {
     if (!productNumber.includes(randomIndex)) {
       productNumber.push(randomIndex);
     }
-
   }
   let index1 = productNumber.shift();
   let index2 = productNumber.shift();
   let index3 = productNumber.shift();
 
-
-
   let firstProduct = products[index1];
   let secondProduct = products[index2];
   let thirdProduct = products[index3];
-
   // DOM manipulation
   // This replaces the src for the image with the img src from the product variable
 // Attempted for loop
@@ -101,15 +123,13 @@ function renderProducts() {
   firstProduct.views++;
   secondProduct.views++;
   thirdProduct.views++;
-
-
-
 }
 
 // Event handler
 // what happens when a user clicks a product?
 function handleProductClick(event) {
   clicks++;
+  saveProducts();
   products[event.target.id].clicks++;
   if (clicks > 24) {
     image1.removeEventListener(`click`, handleProductClick);
@@ -120,14 +140,27 @@ function handleProductClick(event) {
 }
 
 function viewResults(event) {
-  let ul = document.querySelector(`ul`);
+  event.preventDefault();
   // Make one li for each goat inside goats[]
+  // for (let i = 0; i < products.length; i++) {
+  //   let li = document.createElement(`li`);
+  //   li.innerText = `${products[i].name} was viewed ${products[i].views} times and was clicked on ${products[i].clicks} times.`;
+  //   ul.appendChild(li);
+  // }
+  generateResults();
+  renderChart();
+  if(event){
+    li.innerText = "";
+  }
+}
+
+function generateResults(){
+  let ul = document.querySelector(`ul`);
   for (let i = 0; i < products.length; i++) {
     let li = document.createElement(`li`);
     li.innerText = `${products[i].name} was viewed ${products[i].views} times and was clicked on ${products[i].clicks} times.`;
     ul.appendChild(li);
   }
-  renderChart();
 }
 
 function renderChart() {
@@ -202,6 +235,7 @@ function renderChart() {
 
 
 // On page load
+pageLoad();
 image1.addEventListener(`click`, handleProductClick);
 image2.addEventListener(`click`, handleProductClick);
 image3.addEventListener(`click`, handleProductClick);
