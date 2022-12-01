@@ -7,6 +7,7 @@ let image1 = document.querySelector(`section img:first-child`);
 let image2 = document.querySelector(`section img:nth-child(2)`);
 let image3 = document.querySelector(`section img:nth-child(3)`)
 let resultsButton = document.getElementById(`results`);
+let clearButton = document.getElementById(`clear`);
 
 let index1 = 0;
 let index2 = 0;
@@ -43,7 +44,7 @@ let products = [product1, product2, product3, product4, product5, product6, prod
 
 
 // Local storage to save our products at each click, initialized on click
-function saveProducts(){
+function saveProducts() {
   // Step 1
   let savedProducts = JSON.stringify(products);
   // Step 2
@@ -51,10 +52,10 @@ function saveProducts(){
 }
 
 // Function to load products on page load
-function loadProducts(){
+function loadProducts() {
   // Step 3
   let getProducts = localStorage.getItem(`savedProducts`);
-  if(getProducts){
+  if (getProducts) {
     products = JSON.parse(getProducts);
     console.log(`products are`, getProducts);
     return getProducts;
@@ -62,8 +63,8 @@ function loadProducts(){
   // Step 4
 }
 
-function pageLoad(){
-  if(!loadProducts){
+function pageLoad() {
+  if (!loadProducts) {
     return;
   }
   //apply product last
@@ -97,13 +98,13 @@ function renderProducts() {
   let thirdProduct = products[index3];
   // DOM manipulation
   // This replaces the src for the image with the img src from the product variable
-// Attempted for loop
-// for(let i = 1; i < 4; i++){
-//   image(i).src = firstProduct.src;
-//   image(i).alt = firstProduct.name;
-//   image(i).title = firstProduct.name
-//   image(i).id = index(i);
-// }
+  // Attempted for loop
+  // for(let i = 1; i < 4; i++){
+  //   image(i).src = firstProduct.src;
+  //   image(i).alt = firstProduct.name;
+  //   image(i).title = firstProduct.name
+  //   image(i).id = index(i);
+  // }
   image1.src = firstProduct.src;
   image1.alt = firstProduct.name;
   image1.title = firstProduct.name
@@ -141,31 +142,40 @@ function handleProductClick(event) {
 
 function viewResults(event) {
   event.preventDefault();
-  // Make one li for each goat inside goats[]
-  // for (let i = 0; i < products.length; i++) {
-  //   let li = document.createElement(`li`);
-  //   li.innerText = `${products[i].name} was viewed ${products[i].views} times and was clicked on ${products[i].clicks} times.`;
-  //   ul.appendChild(li);
-  // }
   generateResults();
   renderChart();
-  if(event){
-    li.innerHTML = "";
-    ul.innerHTML = "";
-    renderChart();
-  }
 }
 
-function generateResults(){
+function clearResults(event) {
+  event.preventDefault();
+  clicks = 0;
+  for(let i = 0; i < products.length; i++){
+    products[i].clicks = 0;
+    products[i].views = 0;
+  }
+  // for loop reset products clicks and views to 0
+  renderProducts();
+  myChart.destroy();
+  renderChart();
+}
+
+function generateResults() {
   let ul = document.querySelector(`ul`);
+  const fragment = document.createDocumentFragment();
   for (let i = 0; i < products.length; i++) {
     let li = document.createElement(`li`);
     li.innerText = `${products[i].name} was viewed ${products[i].views} times and was clicked on ${products[i].clicks} times.`;
-    ul.appendChild(li);
+    fragment.appendChild(li);
   }
+  ul.replaceChildren(fragment);
 }
 
 function renderChart() {
+  document.getElementById(`myChart`).remove();
+  let myChart = document.createElement(`canvas`);
+  myChart.id = `myChart`;
+  document.getElementById(`chart`).appendChild(myChart);
+
   let productNames = [];
   let productLikes = [];
   let productViews = [];
@@ -231,9 +241,10 @@ function renderChart() {
       }
     },
   };
-  let canvasChart = document.getElementById('myChart');
-  const myChart = new Chart(canvasChart, config);
+  // let canvasChart = document.getElementById('myChart');
+  new Chart(myChart, config);
 }
+
 
 
 // On page load
@@ -242,4 +253,5 @@ image1.addEventListener(`click`, handleProductClick);
 image2.addEventListener(`click`, handleProductClick);
 image3.addEventListener(`click`, handleProductClick);
 resultsButton.addEventListener(`click`, viewResults);
+clearButton.addEventListener(`click`, clearResults)
 renderProducts();
