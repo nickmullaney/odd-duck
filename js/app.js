@@ -150,7 +150,9 @@ function viewResults(event) {
   generateResults();
   renderChart();
   if(event){
-    li.innerText = "";
+    li.innerHTML = "";
+    ul.innerHTML = "";
+    renderChart();
   }
 }
 
