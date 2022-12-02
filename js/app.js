@@ -8,6 +8,7 @@ let image2 = document.querySelector(`section img:nth-child(2)`);
 let image3 = document.querySelector(`section img:nth-child(3)`)
 let resultsButton = document.getElementById(`results`);
 let clearButton = document.getElementById(`clear`);
+let productNumber = [];
 
 let index1 = 0;
 let index2 = 0;
@@ -79,19 +80,20 @@ function getRandomIndex() {
 
 // render function: invoke function on page load, I want to load 3 random products
 function renderProducts() {
-  productNumber = [];
   // This prevents the same images from appearing
   // Build while loop for all 3 things********************
-  while (productNumber.length < 3) {
+  while (productNumber.length < 6) {
     let randomIndex = getRandomIndex();
     // while unique numbers does not include the the random generated number inside nums, then push it
     if (!productNumber.includes(randomIndex)) {
+      console.log(randomIndex);
       productNumber.push(randomIndex);
     }
   }
   let index1 = productNumber.shift();
   let index2 = productNumber.shift();
   let index3 = productNumber.shift();
+  console.log(`-----------------------------`);
 
   let firstProduct = products[index1];
   let secondProduct = products[index2];
@@ -155,7 +157,6 @@ function clearResults(event) {
   }
   // for loop reset products clicks and views to 0
   renderProducts();
-  myChart.destroy();
   renderChart();
 }
 
