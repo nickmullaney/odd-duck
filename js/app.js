@@ -15,13 +15,14 @@ let index2 = 0;
 let index3 = 0;
 let clicks = 0;
 
+// product constructor
 function Product(name, src) {
   this.name = name;
   this.src = src;
   this.clicks = 0;
   this.views = 0;
 }
-
+// Building new producuts
 let product1 = new Product(`R2 Bag`, `img/bag.jpg`);
 let product2 = new Product(`Banana Slicer`, `img/banana.jpg`);
 let product3 = new Product(`Pad Pooper`, `img/bathroom.jpg`);
@@ -64,6 +65,7 @@ function loadProducts() {
   // Step 4
 }
 
+// On Page load, load products if there are any saved from last time
 function pageLoad() {
   if (!loadProducts) {
     return;
@@ -72,10 +74,9 @@ function pageLoad() {
   loadProducts();
 }
 
-// get random goat index
+// get random index
 function getRandomIndex() {
-  // possible return values: 0, 1, 2
-  return Math.floor(Math.random() * products.length) // Math.random() ** goats.length returns number between 0-2.9999999. Math.floor() will equal 0,1,2
+  return Math.floor(Math.random() * products.length) 
 }
 
 // render function: invoke function on page load, I want to load 3 random products
@@ -86,27 +87,19 @@ function renderProducts() {
     let randomIndex = getRandomIndex();
     // while unique numbers does not include the the random generated number inside nums, then push it
     if (!productNumber.includes(randomIndex)) {
-      console.log(randomIndex);
       productNumber.push(randomIndex);
     }
   }
+
+  // This grabs our unique products from the productNumber Array
   let index1 = productNumber.shift();
   let index2 = productNumber.shift();
   let index3 = productNumber.shift();
-  console.log(`-----------------------------`);
 
   let firstProduct = products[index1];
   let secondProduct = products[index2];
   let thirdProduct = products[index3];
-  // DOM manipulation
-  // This replaces the src for the image with the img src from the product variable
-  // Attempted for loop
-  // for(let i = 1; i < 4; i++){
-  //   image(i).src = firstProduct.src;
-  //   image(i).alt = firstProduct.name;
-  //   image(i).title = firstProduct.name
-  //   image(i).id = index(i);
-  // }
+
   image1.src = firstProduct.src;
   image1.alt = firstProduct.name;
   image1.title = firstProduct.name
@@ -134,6 +127,7 @@ function handleProductClick(event) {
   clicks++;
   saveProducts();
   products[event.target.id].clicks++;
+  // If clicks go over 25 remove the option to click
   if (clicks > 24) {
     image1.removeEventListener(`click`, handleProductClick);
     image2.removeEventListener(`click`, handleProductClick);
@@ -142,6 +136,7 @@ function handleProductClick(event) {
   renderProducts();
 }
 
+// This re-renders our chart when we click it
 function viewResults(event) {
   event.preventDefault();
   generateResults();
@@ -160,6 +155,7 @@ function clearResults(event) {
   renderChart();
 }
 
+// This generates the results of our selections
 function generateResults() {
   let ul = document.querySelector(`ul`);
   const fragment = document.createDocumentFragment();
@@ -171,6 +167,7 @@ function generateResults() {
   ul.replaceChildren(fragment);
 }
 
+// Renders chart
 function renderChart() {
   document.getElementById(`myChart`).remove();
   let myChart = document.createElement(`canvas`);
