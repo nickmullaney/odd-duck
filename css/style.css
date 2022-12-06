@@ -29,7 +29,6 @@ header {
   justify-content: space-between;
   align-items: center;
   transition: ease-in;
-  flex-direction: column;
 }
 nav {
   display: flex;
@@ -49,18 +48,47 @@ nav a {
   border-radius: 25px;
   color: aliceblue;
   font-family: "Noto Sans", sans-serif, "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  /* border: 1px solid red; */
+  text-decoration: none;
+  transition: 1s;
 }
+
 nav a:hover {
   transition: 1s;
   font-size: 22px;
   width: max-content;
   align-items: right;
   background: linear-gradient(53deg, green, rgb(83, 218, 10));
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px 1px yellowgreen;
+  text-decoration-line: underline;
 }
+
+
 /* Sidebar and main content */
 .container {
 	height: 100%;
+}
+
+.container h1{
+  margin: 2rem;
+  height: fit-content;
+  width: fit-content;
+  padding: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  align-items: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 500;
+  background-color: darkolivegreen;
+  color: aliceblue;
+  border: 2px solid gray;
+  border-style: groove;
+  box-shadow: 2px 2px 2px 2px olivedrab;
+}
+
+.container h1:hover{
+  transition: 1s;
+  background-color: rgb(131, 164, 74);
 }
 
 .sidebarLeft {
@@ -156,9 +184,17 @@ button:hover{
   border-style: dashed;
   margin: 1rem;
   padding: 1rem;
+  padding-left: 2rem;
   background-color: rgb(131, 170, 131);
 }
 
+.results ul li:hover{
+  transition: 1s;
+  background-color: rgb(131, 164, 74);
+  padding: .5rem;
+}
+
+/* Chart display */
 #chart #myChart:empty{
   display: none;
 }
@@ -171,4 +207,7 @@ button:hover{
   width: 100%;
   padding: 1rem;
   background-color: rgb(163, 223, 201);
-margin-bottom: 10%;}
+margin-bottom: 10%;
+border: 2px solid gray;
+border-style: groove;
+}

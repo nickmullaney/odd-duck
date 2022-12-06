@@ -76,7 +76,7 @@ function pageLoad() {
 
 // get random index
 function getRandomIndex() {
-  return Math.floor(Math.random() * products.length) 
+  return Math.floor(Math.random() * products.length)
 }
 
 // render function: invoke function on page load, I want to load 3 random products
@@ -146,10 +146,13 @@ function viewResults(event) {
 function clearResults(event) {
   event.preventDefault();
   clicks = 0;
-  for(let i = 0; i < products.length; i++){
+  for (let i = 0; i < products.length; i++) {
     products[i].clicks = 0;
     products[i].views = 0;
   }
+  image1.addEventListener(`click`, handleProductClick);
+  image2.addEventListener(`click`, handleProductClick);
+  image3.addEventListener(`click`, handleProductClick);
   // for loop reset products clicks and views to 0
   renderProducts();
   renderChart();
@@ -243,7 +246,15 @@ function renderChart() {
   new Chart(myChart, config);
 }
 
+// Stack Overflow helped with building this
+const audio = new Audio('https://www.fesliyanstudios.com/play-mp3/7008');
+const buttons = document.querySelectorAll('button');
 
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    audio.play();
+  });
+});
 
 // On page load
 pageLoad();
